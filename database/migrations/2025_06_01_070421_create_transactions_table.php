@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('transaction_id')->constrained()->onDelete('cascade');
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->integer('quantity');
-            $table->integer('price');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('alamat');
+            $table->enum('status', ['menunggu', 'dikirim'])->default('menunggu');
             $table->timestamps();
         });
     }
