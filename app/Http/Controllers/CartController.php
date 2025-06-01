@@ -58,14 +58,18 @@ class CartController extends Controller
             return redirect()->back()->with('error', 'Keranjang kosong.');
         }
 
-        // Buat transaksi utama
+        foreach ($carts as $cart) {
+            if ($cart->quantity > $cart->product->stock) {
+                return redirect()->back()->with('error', "Stok tidak cukup untuk produk: {$cart->product->name}");
+            }
+        }
+
         $transaction = Transaction::create([
             'user_id' => $user->id,
             'alamat' => $request->alamat,
             'status' => 'menunggu',
         ]);
 
-        // Simpan semua item dari keranjang ke transaction_items
         foreach ($carts as $cart) {
             TransactionItem::create([
                 'transaction_id' => $transaction->id,
@@ -74,11 +78,9 @@ class CartController extends Controller
                 'price' => $cart->product->price,
             ]);
 
-            // Kurangi stok produk
             $cart->product->decrement('stock', $cart->quantity);
         }
 
-        // Hapus isi keranjang
         Cart::where('user_id', $user->id)->delete();
 
         return redirect('/produk')->with('success', 'Checkout berhasil! Pesanan sedang diproses.');
