@@ -27,7 +27,7 @@
             </h5>
         </div>
         <div class="card-body">
-            <form action="{{ route('products.update', $product->id) }}" method="POST">
+            <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -59,7 +59,7 @@
                     {{-- Preview Gambar Lama --}}
                     @if ($product->image)
                         <div class="mt-3">
-                            <img id="imagePreview" src="{{ asset('storage/' . $product->image) }}"
+                            <img id="imagePreview" src="{{ Storage::disk('s3')->url($product->image) }}"
                                 class="img-fluid rounded border" style="max-height: 200px;">
                         </div>
                     @endif

@@ -48,7 +48,7 @@
                                 <!-- Gambar Produk -->
                                 <td>
                                     @if ($product->image)
-                                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
+                                        <img src="{{ $product->image_url }}" alt="{{ $product->name }}"
                                             class="img-thumbnail" style="width: 80px; height: auto;">
                                     @else
                                         <span class="text-muted">Tidak ada</span>

@@ -29,8 +29,7 @@
         @forelse ($products as $product)
             <div class="col-md-3 mb-4">
                 <div class="card product-card h-100">
-                    <img src="{{ $product->image ? asset('storage/' . $product->image) : asset('images/default.png') }}"
-                        class="card-img-top" alt="{{ $product->name }}">
+                    <img src="{{ $product->image_url }}" class="card-img-top" alt="{{ $product->name }}">
                     <div class="card-body">
                         <h6 class="card-title">{{ $product->name }}</h6>
                         <p class="text-muted mb-2">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
