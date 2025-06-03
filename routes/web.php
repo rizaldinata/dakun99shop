@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\admin\AdminTransactionController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 Route::get('/dashboard', function () {

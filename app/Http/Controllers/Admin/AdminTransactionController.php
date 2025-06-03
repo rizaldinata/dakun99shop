@@ -10,7 +10,7 @@ class AdminTransactionController extends Controller
 {
     public function index()
     {
-        $transactions = Transaction::with(['user', 'items.product'])->latest()->get();
+        $transactions = Transaction::with(['user', 'items.product'])->latest()->paginate(10);
         return view('admin.transactions.index', compact('transactions'));
     }
 
@@ -23,6 +23,11 @@ class AdminTransactionController extends Controller
     public function update(Request $request, Transaction $transaction)
     {
         $transaction->update(['status' => 'dikirim']);
-        return redirect()->back()->with('success', 'Pesanan dikirim!');
+
+        if ($request->ajax()) {
+            return response()->json(['success' => true]);
+        }
+
+        return back()->with('success', 'Status pesanan berhasil diubah.');
     }
 }
