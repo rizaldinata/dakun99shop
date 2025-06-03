@@ -7,7 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductUserController;
 use App\Http\Controllers\UserTransactionController;
 use App\Http\Controllers\Admin\AdminProductController;
-use App\Http\Controllers\admin\AdminTransactionController;
+use App\Http\Controllers\Admin\AdminTransactionController;
 
 Route::get('/', function () {
     return redirect('/login');
