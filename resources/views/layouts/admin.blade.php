@@ -411,7 +411,7 @@
 
         <ul class="sidebar-nav list-unstyled">
             <li class="nav-item">
-                <a href="{{ route('dashboard') }}"
+                <a href="{{ route('admin.dashboard.index') }}"
                     class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                     <i class="fas fa-tachometer-alt"></i>
                     <span>Dashboard</span>
