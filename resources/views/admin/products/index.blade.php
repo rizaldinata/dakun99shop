@@ -31,6 +31,7 @@
                     <thead>
                         <tr>
                             <th style="width: 50px;">#</th>
+                            <th style="width: 100px;">Gambar</th>
                             <th>Nama Produk</th>
                             <th style="width: 150px;">Harga</th>
                             <th style="width: 100px;">Stok</th>
@@ -43,6 +44,18 @@
                                 <td class="text-muted">
                                     {{ ($products->currentPage() - 1) * $products->perPage() + $index + 1 }}
                                 </td>
+
+                                <!-- Gambar Produk -->
+                                <td>
+                                    @if ($product->image)
+                                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
+                                            class="img-thumbnail" style="width: 80px; height: auto;">
+                                    @else
+                                        <span class="text-muted">Tidak ada</span>
+                                    @endif
+                                </td>
+
+                                <!-- Nama Produk -->
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <div class="product-icon me-3">
