@@ -4,6 +4,7 @@ use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductUserController;
 use App\Http\Controllers\UserTransactionController;
 use App\Http\Controllers\Admin\AdminProductController;
@@ -13,10 +14,6 @@ use App\Http\Controllers\admin\AdminTransactionController;
 Route::get('/', function () {
     return redirect('/login');
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -36,6 +33,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/produk', [ProductUserController::class, 'index'])->name('produk.index');
     Route::post('/keranjang/tambah/{product}', [CartController::class, 'add'])->name('cart.add');
 
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
     // Keranjang
     Route::get('/keranjang', [CartController::class, 'index'])->name('cart.index');
 
@@ -46,8 +46,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/transaksi-saya', [UserTransactionController::class, 'index'])->name('user.transactions.index');
 
     // Detail Transaksi
-    Route::get('/transaksi-saya/{transaction}', [UserTransactionController::class, 'show'])
-        ->name('user.transactions.show');
+    Route::get('/transaksi-saya/{transaction}', [UserTransactionController::class, 'show'])->name('user.transactions.show');
 });
 
 require __DIR__.'/auth.php';
