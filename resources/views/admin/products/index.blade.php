@@ -48,10 +48,11 @@
                                 <!-- Gambar Produk -->
                                 <td>
                                     @if ($product->image)
-                                        <img src="{{ $product->image_url }}" alt="{{ $product->name }}"
-                                            class="img-thumbnail" style="width: 80px; height: auto;">
+                                        <img src="{{ Storage::disk('s3')->url($product->image) }}" class="img-thumbnail"
+                                            alt="{{ $product->name }}">
                                     @else
-                                        <span class="text-muted">Tidak ada</span>
+                                        <img src="{{ asset('images/dakun99shop.png') }}" class="img-thumbnail"
+                                            alt="Gambar default">
                                     @endif
                                 </td>
 

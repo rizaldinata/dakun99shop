@@ -59,8 +59,13 @@
                     {{-- Preview Gambar Lama --}}
                     @if ($product->image)
                         <div class="mt-3">
-                            <img id="imagePreview" src="{{ Storage::disk('s3')->url($product->image) }}"
-                                class="img-fluid rounded border" style="max-height: 200px;">
+                            @if ($product->image)
+                                <img src="{{ Storage::disk('s3')->url($product->image) }}" class="img-fluid rounded border"
+                                    alt="{{ $product->name }}">
+                            @else
+                                <img src="{{ asset('images/dakun99shop.png') }}" class="img-fluid rounded border"
+                                    alt="Gambar default">
+                            @endif
                         </div>
                     @endif
                 </div>

@@ -19,7 +19,7 @@ class CartController extends Controller
             ->get();
 
 
-        return view('keranjang.index', compact('carts'));
+        return view('user.cart.index', compact('carts'));
     }
 
     public function add(Product $product)
@@ -83,6 +83,6 @@ class CartController extends Controller
 
         Cart::where('user_id', $user->id)->delete();
 
-        return redirect('/produk')->with('success', 'Checkout berhasil! Pesanan sedang diproses.');
+        return redirect('/dashboard')->with('success', 'Checkout berhasil! Pesanan sedang diproses.');
     }
 }

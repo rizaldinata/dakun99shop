@@ -31,7 +31,6 @@ class AdminProductController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            // Upload ke S3
             $validated['image'] = $request->file('image')->store('products_images', 's3');
         }
 
@@ -47,7 +46,6 @@ class AdminProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
-        // Validasi dinamis
         $rules = [
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -66,10 +64,8 @@ class AdminProductController extends Controller
             if ($product->image && Storage::disk('s3')->exists($product->image)) {
                 Storage::disk('s3')->delete($product->image);
             }
-            // Simpan gambar baru
             $validated['image'] = $request->file('image')->store('products_images', 's3');
         } else {
-            // Pertahankan gambar lama
             $validated['image'] = $product->image;
         }
 

@@ -29,11 +29,17 @@
         @forelse ($products as $product)
             <div class="col-md-3 mb-4">
                 <div class="card product-card h-100">
-                    <img src="{{ $product->image_url }}" class="card-img-top" alt="{{ $product->name }}">
+                    @if ($product->image)
+                        <img src="{{ Storage::disk('s3')->url($product->image) }}" class="card-img-top"
+                            alt="{{ $product->name }}">
+                    @else
+                        <img src="{{ asset('images/dakun99shop.png') }}" class="card-img-top" alt="Gambar default">
+                    @endif
                     <div class="card-body">
                         <h6 class="card-title">{{ $product->name }}</h6>
                         <p class="text-muted mb-2">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-                        <a href="#" class="btn btn-sm btn-primary w-100">Lihat Detail</a>
+                        <a href="{{ route('produk.show', $product->id) }}" class="btn btn-sm btn-primary w-100">Lihat
+                            Detail</a>
                     </div>
                 </div>
             </div>

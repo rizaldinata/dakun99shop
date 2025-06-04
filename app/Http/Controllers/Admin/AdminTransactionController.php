@@ -24,10 +24,9 @@ class AdminTransactionController extends Controller
     {
         $transaction->update(['status' => 'dikirim']);
 
-        if ($request->ajax()) {
-            return response()->json(['success' => true]);
-        }
-
-        return back()->with('success', 'Status pesanan berhasil diubah.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Status updated successfully.'
+        ]);
     }
 }

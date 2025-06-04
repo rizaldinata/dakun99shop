@@ -30,7 +30,11 @@ Route::middleware(['auth', IsAdmin::class])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+
+    // Produk
     Route::get('/produk', [ProductUserController::class, 'index'])->name('produk.index');
+    Route::get('/produk/{product}', [ProductUserController::class, 'show'])->name('produk.show');
+
     Route::post('/keranjang/tambah/{product}', [CartController::class, 'add'])->name('cart.add');
 
     // Dashboard

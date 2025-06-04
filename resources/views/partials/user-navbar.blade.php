@@ -10,10 +10,10 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav align-items-center">
-                <li class="nav-item"><a class="nav-link {{ request()->routeIs('produk.index') ? 'active' : '' }}"
-                        href="{{ route('produk.index') }}"><i class="fas fa-home me-1"></i>Beranda</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('produk.index') }}"><i
-                            class="fas fa-box me-1"></i>Produk</a></li>
+                <li class="nav-item"><a class="nav-link {{ request()->routeIs('dashboard.index') ? 'active' : '' }}"
+                        href="{{ route('dashboard.index') }}"><i class="fas fa-home me-1"></i>Beranda</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('user.transactions.index') }}"><i
+                            class="fas fa-box me-1"></i>Riwayat Transaksi</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('cart.index') }}"><i
                             class="fas fa-shopping-cart me-1"></i>Keranjang</a></li>
                 <li class="nav-item dropdown">
@@ -22,22 +22,22 @@
                         <i class="fas fa-user me-1"></i>{{ Auth::user()->name }}
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i
-                                    class="fas fa-user-edit me-2"></i>Profil</a></li>
-                        <li><a class="dropdown-item" href="{{ route('user.transactions.index') }}"><i
+                        {{-- <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i
+                                    class="fas fa-user-edit me-2"></i>Profil</a></li> --}}
+                        {{-- <li><a class="dropdown-item" href="{{ route('user.transactions.index') }}"><i
                                     class="fas fa-history me-2"></i>Transaksi</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit" class="dropdown-item"><i
-                                        class="fas fa-sign-out-alt me-2"></i>Logout</button>
-                            </form>
-                        </li>
-                    </ul>
+                        <li> --}}
+                        {{-- <hr class="dropdown-divider"> --}}
                 </li>
+                <li>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="dropdown-item"><i
+                                class="fas fa-sign-out-alt me-2"></i>Logout</button>
+                    </form>
+                </li>
+            </ul>
+            </li>
             </ul>
         </div>
     </div>

@@ -1,35 +1,47 @@
-@extends('layouts.app')
+@extends('layouts.user')
+
+@section('title', 'Riwayat Transaksi')
 
 @section('content')
-    <div class="container">
-        <h1>Transaksi Saya</h1>
+    <div class="container py-4">
+        <h2 class="mb-4">Riwayat Transaksi</h2>
 
         @if ($transactions->isEmpty())
-            <p>Belum ada transaksi.</p>
+            <div class="text-muted text-center">Belum ada transaksi.</div>
         @else
-            @foreach ($transactions as $t)
-                <div class="card mb-3">
-                    <div class="card-header d-flex justify-content-between">
-                        <strong>Transaksi #{{ $t->id }}</strong>
-                        <span class="badge {{ $t->status === 'dikirim' ? 'bg-success' : 'bg-warning text-dark' }}">
-                            {{ ucfirst($t->status) }}
-                        </span>
-                    </div>
-                    <div class="card-body">
-                        <p><strong>Alamat:</strong> {{ $t->alamat }}</p>
-                        <ul>
-                            @foreach ($t->items as $item)
-                                <li>{{ $item->product->name }} (x{{ $item->quantity }}) -
-                                    Rp{{ number_format($item->price) }}</li>
-                                <a href="{{ route('user.transactions.show', $t->id) }}"
-                                    class="btn btn-sm btn-outline-primary">
-                                    Lihat Detail
-                                </a>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            @endforeach
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle">
+                    <thead>
+                        <tr>
+                            <th>ID Transaksi</th>
+                            <th>Tanggal</th>
+                            <th>Status</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($transactions as $trx)
+                            @php
+                                $total = $trx->items->sum(function ($item) {
+                                    return $item->quantity * $item->price;
+                                });
+                            @endphp
+                            <tr>
+                                <td>#{{ $trx->id }}</td>
+                                <td>{{ $trx->created_at->format('d M Y') }}</td>
+                                <td><span class="badge bg-info">{{ ucfirst($trx->status) }}</span></td>
+                                <td>Rp {{ number_format($total, 0, ',', '.') }}</td>
+                                <td>
+                                    <a href="{{ route('user.transactions.show', $trx->id) }}" class="btn btn-sm btn-primary">
+                                        Lihat Detail
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         @endif
     </div>
 @endsection
