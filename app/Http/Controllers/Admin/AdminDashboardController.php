@@ -18,10 +18,8 @@ class AdminDashboardController extends Controller
         $pesananBelumDikirim = Transaction::where('status', '!=', 'dikirim')->count();
         $pesananDikirim = Transaction::where('status', 'dikirim')->count();
 
-        // Total pemasukan dari semua transaksi (harga * quantity)
         $totalPemasukan = TransactionItem::sum(DB::raw('price * quantity'));
 
-        // Misal pengeluaran manual diset atau diambil dari tabel `expenses` (belum tersedia)
         $totalPengeluaran = 0;
 
         $saldoSekarang = $totalPemasukan - $totalPengeluaran;

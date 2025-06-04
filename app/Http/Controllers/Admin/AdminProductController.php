@@ -60,7 +60,7 @@ class AdminProductController extends Controller
         $validated = $request->validate($rules);
 
         if ($request->hasFile('image')) {
-            // Hapus gambar lama di S3
+            // Hapus gambar lama yang ada di S3
             if ($product->image && Storage::disk('s3')->exists($product->image)) {
                 Storage::disk('s3')->delete($product->image);
             }
@@ -76,7 +76,7 @@ class AdminProductController extends Controller
 
     public function destroy(Product $product)
     {
-        // Hapus gambar dari S3 jika ada
+        // Hapus gambar di s3
         if ($product->image && Storage::disk('s3')->exists($product->image)) {
             Storage::disk('s3')->delete($product->image);
         }

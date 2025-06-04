@@ -136,7 +136,7 @@
                         dari {{ $products->total() }} produk
                     </div>
                     <div>
-                        {{ $products->links() }}
+                        {{ $products->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>

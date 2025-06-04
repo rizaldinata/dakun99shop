@@ -12,18 +12,12 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Ambil produk terbaru (maksimal 8 untuk ditampilkan)
-        $products = Product::latest()->take(8)->get();
+        $products = Product::latest()->take(8)->get(); // produk terbaru
+        $allProducts = Product::latest()->paginate(12); // semua produk dengan pagination
         
-        // Hitung total produk
         $totalProducts = Product::count();
-        
-        // Hitung total pesanan user (jika sudah login)
-        $userOrders = 0;
-        if (Auth::check()) {
-            $userOrders = Transaction::where('user_id', Auth::id())->count();
-        }
-        
-        return view('user.dashboard.index', compact('products', 'totalProducts', 'userOrders'));
+        $userOrders = Auth::check() ? Transaction::where('user_id', Auth::id())->count() : 0;
+
+        return view('user.dashboard.index', compact('products', 'allProducts', 'totalProducts', 'userOrders'));
     }
 }
