@@ -31,6 +31,7 @@
                     <thead>
                         <tr>
                             <th style="width: 50px;">#</th>
+                            <th style="width: 100px;">Gambar</th>
                             <th>Nama Produk</th>
                             <th style="width: 150px;">Harga</th>
                             <th style="width: 100px;">Stok</th>
@@ -43,6 +44,19 @@
                                 <td class="text-muted">
                                     {{ ($products->currentPage() - 1) * $products->perPage() + $index + 1 }}
                                 </td>
+
+                                <!-- Gambar Produk -->
+                                <td>
+                                    @if ($product->image)
+                                        <img src="{{ Storage::disk('s3')->url($product->image) }}" class="img-thumbnail"
+                                            alt="{{ $product->name }}">
+                                    @else
+                                        <img src="{{ asset('images/dakun99shop.png') }}" class="img-thumbnail"
+                                            alt="Gambar default">
+                                    @endif
+                                </td>
+
+                                <!-- Nama Produk -->
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <div class="product-icon me-3">

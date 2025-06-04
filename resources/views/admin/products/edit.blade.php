@@ -27,7 +27,7 @@
             </h5>
         </div>
         <div class="card-body">
-            <form action="{{ route('products.update', $product->id) }}" method="POST">
+            <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -51,6 +51,26 @@
                     <input type="number" name="stock" class="form-control" value="{{ $product->stock }}" required>
                 </div>
 
+                <div class="mb-3">
+                    <label class="form-label">Gambar Produk</label>
+                    <input type="file" name="image" class="form-control" accept="image/*"
+                        onchange="previewImage(event)">
+
+                    {{-- Preview Gambar Lama --}}
+                    @if ($product->image)
+                        <div class="mt-3">
+                            @if ($product->image)
+                                <img src="{{ Storage::disk('s3')->url($product->image) }}" class="img-fluid rounded border"
+                                    alt="{{ $product->name }}">
+                            @else
+                                <img src="{{ asset('images/dakun99shop.png') }}" class="img-fluid rounded border"
+                                    alt="Gambar default">
+                            @endif
+                        </div>
+                    @endif
+                </div>
+
+
                 <div class="mt-4">
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-save me-2"></i>Update Produk
@@ -62,4 +82,19 @@
             </form>
         </div>
     </div>
+
+    <script>
+        function previewImage(event) {
+            const input = event.target;
+            const preview = document.getElementById('imagePreview');
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 @endsection

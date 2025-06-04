@@ -27,7 +27,8 @@
             </h5>
         </div>
         <div class="card-body">
-            <form action="{{ route('products.store') }}" method="POST">
+            {{-- Tambahkan enctype agar gambar bisa diupload --}}
+            <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-3">
@@ -50,6 +51,16 @@
                     <input type="number" name="stock" class="form-control" required>
                 </div>
 
+                {{-- Kolom Upload Gambar --}}
+                <div class="mb-3">
+                    <label class="form-label">Gambar Produk</label>
+                    <input type="file" name="image" class="form-control" accept="image/*"
+                        onchange="previewImage(event)">
+                    <div class="mt-3">
+                        <img id="imagePreview" src="#" alt="Preview Gambar"
+                            class="img-fluid rounded shadow-sm border" style="max-height: 200px; display: none;">
+                    </div>
+                </div>
                 <div class="mt-4">
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-save me-2"></i>Simpan Produk
@@ -61,4 +72,22 @@
             </form>
         </div>
     </div>
+
+    <script>
+        function previewImage(event) {
+            const input = event.target;
+            const preview = document.getElementById('imagePreview');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 @endsection

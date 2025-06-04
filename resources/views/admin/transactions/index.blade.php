@@ -120,44 +120,52 @@
             </div>
         </div>
     </div>
-@endsection
 
-@push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Inisialisasi tooltip
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            tooltipTriggerList.map(function(el) {
-                return new bootstrap.Tooltip(el)
+            // Inisialisasi tooltip Bootstrap
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function(tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
             });
 
-            // Tombol AJAX "Kirim"
             const csrf = '{{ csrf_token() }}';
-            document.querySelectorAll('.btn-kirim').forEach(btn => {
+
+            document.querySelectorAll('.btn-kirim').forEach(function(btn) {
                 btn.addEventListener('click', function() {
                     const url = this.dataset.url;
                     const row = this.closest('tr');
                     const statusCell = row.querySelector('.status-cell');
+                    const self = this;
+
+                    const formData = new FormData();
+                    formData.append('_token', csrf);
+                    formData.append('_method', 'PATCH');
 
                     fetch(url, {
-                            method: 'PATCH',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': csrf
-                            },
-                            body: JSON.stringify({})
-                        }).then(res => res.json())
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(res => {
+                            if (!res.ok) {
+                                throw new Error('HTTP status ' + res.status);
+                            }
+                            return res.json();
+                        })
                         .then(data => {
                             if (data.success) {
                                 statusCell.innerHTML =
                                     '<span class="badge bg-success">Dikirim</span>';
-                                this.remove(); // Hapus tombol kirim
+                                self.remove(); // hapus tombol
                             } else {
                                 alert('Gagal mengubah status.');
                             }
-                        }).catch(() => alert('Terjadi kesalahan.'));
+                        })
+                        .catch(err => {
+                            alert('Terjadi kesalahan saat mengubah status.\n' + err.message);
+                        });
                 });
             });
         });
     </script>
-@endpush
+@endsection

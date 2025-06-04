@@ -5,12 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class AdminProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $products = Product::latest()->paginate(10);
@@ -25,11 +23,16 @@ class AdminProductController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required',
-            'description' => 'nullable',
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
             'price' => 'required|integer|min:0',
             'stock' => 'required|integer|min:0',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
+
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('products_images', 's3');
+        }
 
         Product::create($validated);
 
@@ -43,12 +46,28 @@ class AdminProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
-        $validated = $request->validate([
-            'name' => 'required',
-            'description' => 'nullable',
+        $rules = [
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
             'price' => 'required|integer|min:0',
             'stock' => 'required|integer|min:0',
-        ]);
+        ];
+
+        if ($request->hasFile('image')) {
+            $rules['image'] = 'image|mimes:jpg,jpeg,png|max:2048';
+        }
+
+        $validated = $request->validate($rules);
+
+        if ($request->hasFile('image')) {
+            // Hapus gambar lama di S3
+            if ($product->image && Storage::disk('s3')->exists($product->image)) {
+                Storage::disk('s3')->delete($product->image);
+            }
+            $validated['image'] = $request->file('image')->store('products_images', 's3');
+        } else {
+            $validated['image'] = $product->image;
+        }
 
         $product->update($validated);
 
@@ -57,6 +76,11 @@ class AdminProductController extends Controller
 
     public function destroy(Product $product)
     {
+        // Hapus gambar dari S3 jika ada
+        if ($product->image && Storage::disk('s3')->exists($product->image)) {
+            Storage::disk('s3')->delete($product->image);
+        }
+
         $product->delete();
 
         return redirect()->route('products.index')->with('success', 'Produk berhasil dihapus.');

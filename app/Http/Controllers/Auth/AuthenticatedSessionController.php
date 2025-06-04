@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         return redirect()->intended(
-            Auth::user()->role === 'admin' ? '/admin/products' : '/produk'
+            Auth::user()->role === 'admin' ? '/admin/dashboard' : '/dashboard'
         );
     }
 
@@ -44,6 +44,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
 }
