@@ -406,7 +406,7 @@
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-brand">
             <img src="{{ asset('images/dakun99shop.png') }}" alt="Logo">
-            <h4>Dakun99 Shop</h4>
+            <h4>Dakun GunShop</h4>
         </div>
 
         <ul class="sidebar-nav list-unstyled">

@@ -6,7 +6,7 @@
     {{-- Greeting Section --}}
     <div class="container mb-5">
         <div class="greeting-section">
-            <h2 class="greeting-title">Selamat datang di Dakun99 Shop</h2>
+            <h2 class="greeting-title">Selamat datang di Dakun GunShop</h2>
             <p class="greeting-text">Platform terpercaya untuk skin senjata PUBG dengan koleksi eksklusif, harga terjangkau,
                 dan layanan terbaik untuk para gamer Indonesia.</p>
         </div>
@@ -104,12 +104,12 @@
         <div class="container">
             <div class="footer-main">
                 <div class="footer-brand">
-                    <h4>Dakun99 Shop</h4>
+                    <h4>Dakun GunShop</h4>
                     <p>Platform terpercaya untuk skin PUBG</p>
                 </div>
                 <div class="footer-contact">
                     <h5>Hubungi Kami</h5>
-                    <a href="mailto:support@dakun99shop.com">support@dakun99shop.com</a>
+                    <a href="mailto:support@dakun99shop.com">support@dakungunshop.com</a>
                 </div>
                 <div class="footer-info">
                     <h5>Keunggulan Kami</h5>
@@ -121,7 +121,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; {{ now()->year }} Dakun99 Shop. All rights reserved.</p>
+                <p>&copy; {{ now()->year }} Dakun GunShop. All rights reserved.</p>
             </div>
         </div>
     </footer>
