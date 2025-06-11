@@ -2,7 +2,7 @@
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="{{ route('produk.index') }}">
             <img src="{{ asset('images/dakun99shop.png') }}" alt="Logo" height="32" class="me-2">
-            Dakun99 Shop
+            Dakun GunShop
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login - Dakun99 Shop</title>
+    <title>Login - Dakun GunShop</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -289,7 +289,7 @@
             <!-- Logo & Brand -->
             <div class="col-md-5 logo-section">
                 <img src="{{ asset('images/dakun99shop.png') }}" alt="Logo Dakun99 Shop">
-                <div class="logo-title">Dakun99 Shop</div>
+                <div class="logo-title">Dakun GunShop</div>
                 <div class="logo-subtitle">E-Commerce Senjata Api Terpercaya</div>
             </div>
 
@@ -318,7 +318,7 @@
                     <div class="mb-3">
                         <label for="email" class="form-label">Alamat Email</label>
                         <input type="email" name="email" id="email" class="form-control" required autofocus
-                            placeholder="admin@dakun99.com" value="{{ old('email') }}">
+                            placeholder="admin@dakungunshop.com" value="{{ old('email') }}">
                     </div>
 
                     <div class="mb-4">
@@ -340,7 +340,7 @@
                 </form>
 
                 <div class="copyright">
-                    &copy; {{ date('Y') }} Dakun99 Shop - Hak Cipta Dilindungi
+                    &copy; {{ date('Y') }} Dakun GunShop Shop - Hak Cipta Dilindungi
                 </div>
             </div>
         </div>

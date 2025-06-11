@@ -109,7 +109,7 @@
                 </div>
                 <div class="footer-contact">
                     <h5>Hubungi Kami</h5>
-                    <a href="mailto:support@dakun99shop.com">support@dakungunshop.com</a>
+                    <a href="mailto:support@dakungunshop.com">support@dakungunshop.com</a>
                 </div>
                 <div class="footer-info">
                     <h5>Keunggulan Kami</h5>

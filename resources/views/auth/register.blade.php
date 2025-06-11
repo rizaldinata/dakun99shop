@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register - Dakun99 Shop</title>
+    <title>Register - Dakun GunShop</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -304,7 +304,7 @@
             <!-- Logo Section -->
             <div class="col-lg-5 logo-section">
                 <img src="{{ asset('images/dakun99shop.png') }}" alt="Logo Dakun99 Shop">
-                <div class="logo-title">Dakun99 Shop</div>
+                <div class="logo-title">Dakun GunShop</div>
                 <div class="logo-subtitle">E-Commerce Senjata Api Terpercaya</div>
             </div>
 
@@ -362,7 +362,7 @@
                 </form>
 
                 <div class="copyright">
-                    &copy; {{ date('Y') }} Dakun99 Shop - Hak Cipta Dilindungi
+                    &copy; {{ date('Y') }} Dakun GunShop - Hak Cipta Dilindungi
                 </div>
             </div>
         </div>
